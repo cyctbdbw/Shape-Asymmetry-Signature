@@ -1,0 +1,36 @@
+function[groupped_IDS,group_num,EV_num]=EV_groupping(IDScore)
+%% This function take the mean of the identification score based on the harmonic eigen-group
+%% (For more details, see Robinson et al. (2016) at https://pubmed.ncbi.nlm.nih.gov/27157788/)
+%% the groupped_IDS is the mean of the identification score. 
+%% For example, groupped_IDS(1) is the mean of the IDScore(2:4); the first EV belongs to the 0th eigen-group
+%% IDScore is the identifiability score calculated from the identifiability_score.m
+%% group_num is the number of the eigenvalue-groups within the IDScore.
+%% EV_num is the last eigenvalue index in the group_num.
+%% For instance, if the IDScore is from the first 1000 eigenvalues, group_num is 30, and the EV_num is 961, 
+%% and groupped_IDS take the mean of these 30 groups independently. 
+group_final_EV=1;
+group_n=0;group_EV_list=[];
+EV_n=length(IDScore);
+if EV_n<4
+    print('At least 4 eigenvalues are needed')
+end
+
+while group_final_EV<EV_n
+    group_n=group_n+1;
+    for group=1:group_n
+        EV_num=2*(group+1)-1;
+        group_EV_list(group)=EV_num;
+        
+    end
+    group_final_EV(group)=sum(group_EV_list)+1;
+    
+end
+
+group_num=length(group_EV_list)-1;
+
+groupped_IDS(1)=mean(IDScore(2:4));
+for g=2:group_num
+        groupped_IDS(g)=mean(IDScore(group_final_EV(g-1)+1:group_final_EV(g)));
+end
+EV_num=group_final_EV(end-1);
+end
