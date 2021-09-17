@@ -14,5 +14,5 @@ This repository provides scripts for the analysis in "The individuality of shape
 See https://www.biorxiv.org/content/10.1101/2021.09.14.460242v1 for details.
 
 For the heritability analysis, also see
-A. Arnatkeviciute et al., Genetic influences on hub connectivity of the human connectome. Nat Commun 12, 4237 (2021).
+Arnatkeviciute. A. et al., Genetic influences on hub connectivity of the human connectome. Nat Commun 12, 4237 (2021).
 https://www.nature.com/articles/s41467-021-24306-2
