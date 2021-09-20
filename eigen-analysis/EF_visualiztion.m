@@ -1,4 +1,4 @@
-%%This script visualiza the scale of "individual" eigenfunction
+%%This script visualize the scale of "individual" eigenfunction
 figure;
 EF_no=2;%This is the eigenfunction numer for visualization. You can change to another number
 patch(leftSurface,'FaceVertexCData',eigenFunctionsL(:,EF_no),'EdgeColor','none','FaceColor','interp');
