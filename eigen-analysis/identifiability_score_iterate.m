@@ -1,9 +1,11 @@
-function[maxIDs,maxEV,IDScore] =identifiability_score(EV_T1,EV_T2,EV_no)
-%% This function calculates the identifiability score across a range of eigenvalues
+function[maxIDs,maxEV,IDScore] =identifiability_score_iterate(EV_T1,EV_T2,EV_no)
+%% This function calculates the identifiability score iteratively across a range of eigenvalues
 %% between the eigenvalue matrixes of time 1 (EV_T1) and time 2 (EV_T2).
 %% Both EV_T1 and EV_T2 are subjects*eigenvalues; EV_no is the maxinum number of eigenvalues, e.g., 1000
 %% The IDScore is a vector of the identifiability score; maxIDs is the maxinum identifiability score.
 %% maxEV is the eigenvalue index corresponding to the maxIDs   
+%% If you'd like to calculate the identifiability score based on single iteration 
+%% (e.g., just for the first 144 eigenvalues), plese check "identifiability_score_index.m" 
 
 no_sub=size(EV_T1,1);
 IDScore=zeros(1,EV_no);
