@@ -3,7 +3,7 @@ function[groupped_IDS,group_num,EV_num]=EV_groupping(IDScore)
 %% (For more details, see Robinson et al. (2016) at https://pubmed.ncbi.nlm.nih.gov/27157788/)
 %% the groupped_IDS is the mean of the identification score. 
 %% For example, groupped_IDS(1) is the mean of the IDScore(2:4); the first EV belongs to the 0th eigen-group
-%% IDScore is the identifiability score calculated from the identifiability_score.m
+%% IDScore is the identifiability score calculated from the identifiability_score_iterate.m
 %% group_num is the number of the eigenvalue-groups within the IDScore.
 %% EV_num is the last eigenvalue index in the group_num.
 %% For instance, if the IDScore is from the first 1000 eigenvalues, group_num is 30, and the EV_num is 961, 
