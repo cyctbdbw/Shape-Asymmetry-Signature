@@ -1,0 +1,46 @@
+#in massive terminal
+module load connectome
+
+module load matlab
+matlab
+
+% in matalb 
+addpath('/projects/kg98/ychen/HCP_T1_fMRI/gifti'); 
+addpath(genpath('/projects/kg98/ychen/matlabHCPtools'));
+addpath(genpath('/projects/kg98/ychen/HCP_T1_fMRI/scale_representation_of_dynamics'));
+
+load('subj.mat'); %This is the subject list 
+
+smoothingKernel=0; % without any smoothing, you can change it to other values, e.g.,2
+parcellation='MMP'; % You can change it to different parcellations, e.g., Schaefer100 
+labelGifti_left=gifti('Q1-Q6_RelatedParcellation210.L.CorticalAreas_dil_Colors.32k_fs_LR.label.gii');
+labelGifti_right=gifti('Q1-Q6_RelatedParcellation210.R.CorticalAreas_dil_Colors.32k_fs_LR.label.gii');
+parcel_flag='';% 360 Parcellations for the HCP
+uT=find(triu(ones(360,360),1));
+
+clear baseFolder subject_folder_LR subject_folder_RL time1_left
+clear time1_right time1_original r p FC_all FC
+
+for subject=1:45; %45 is the total number of subjects 
+    subject_name=num2str(subj{subject});
+    
+    baseFolder='/projects/kg98/ychen/HCP_T1_fMRI'; % You need to change the folder
+    %baseFolder='/projects/kg98/ychen/HCP_T2_fMRI'; 
+    subject_folder_LR=[baseFolder,'/',subject_name,'/MNINonLinear/Results/rfMRI_REST1_LR'];
+    subject_folder_RL=[baseFolder,'/',subject_name,'/MNINonLinear/Results/rfMRI_REST1_RL'];
+    
+    [left_func_1LR,right_func_1LR] = processHCPcifti([subject_folder_LR,'/rfMRI_REST1_LR_Atlas_MSMAll_hp2000_clean.dtseries.nii'],smoothingKernel);
+    [left_func_1RL,right_func_1RL] = processHCPcifti([subject_folder_RL,'/rfMRI_REST1_RL_Atlas_MSMAll_hp2000_clean.dtseries.nii'],smoothingKernel);
+    
+    % For the FCMs we need to save them
+    time1_left=[left_func_1LR,left_func_1RL];
+    time1_right=[right_func_1LR,right_func_1RL];
+    clear left_func_1RL left_func_1LR right_func_1LR right_func_1RL
+    
+    time1_original(:,:)=[parcelTimeSeries(time1_left,labelGifti_left);parcelTimeSeries(time1_right,labelGifti_right)];
+    [r,p]=corr(time1_original');
+    
+    FC_all=triu(r,1);
+    FC=FC_all(find(FC_all));
+    save([subject_name,'_FC_a'],'FC');
+end
