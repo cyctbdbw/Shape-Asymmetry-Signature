@@ -11,5 +11,5 @@ x1m=mean(diag(r)); %x1m is the mean of within-subject correlation
 x2m=mean(r(idx)); %x2m is the mean of between-subject correlation
 s2=std(r(idx)); %x2m is the std of between-subject correlation
     
-IDScore(i)=(x1m-x2m)/s2;
+IDScore=(x1m-x2m)/s2;
 end
