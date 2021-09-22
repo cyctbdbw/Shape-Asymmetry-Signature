@@ -19,6 +19,6 @@ https://www.nature.com/articles/s41467-021-24306-2
 
 Dependances: gifti toolbox (https://github.com/gllmflndn/gifti.git): this is for generating functional connectivity
 
-For Shape-DNA analysis that appied in our study, please check http://reuter.mit.edu/software/shapedna/ and see the relevant papers:
+For the Shape-DNA analysis that appied in our study, please check http://reuter.mit.edu/software/shapedna/ and see the relevant papers:
 1. M. Reuter, F.-E. Wolter, N. Peinecke, Laplace–Beltrami spectra as ‘Shape-DNA’ of surfaces and solids. Computer-Aided Design 38, 342-366 (2006). https://doi.org/10.1016/j.cad.2005.10.011
 2. M. Reuter, F. E. Wolter, M. Shenton, M. Niethammer, Laplace-Beltrami Eigenvalues and Topological Features of Eigenfunctions for Statistical Shape Analysis. Comput Aided Des 41, 739-755 (2009). https://doi.org/10.1016/j.cad.2009.02.007
