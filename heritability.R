@@ -1,6 +1,6 @@
 args = commandArgs(trailingOnly=TRUE)
 
-require(OpenMx)   # not needed for the simulation, but will be needed when we come to model specification
+require(OpenMx)   
 require(MASS) 
 require(R.matlab) 
 
