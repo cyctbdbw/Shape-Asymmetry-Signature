@@ -18,3 +18,7 @@ Arnatkeviciute. A. et al., Genetic influences on hub connectivity of the human c
 https://www.nature.com/articles/s41467-021-24306-2
 
 Dependances: gifti toolbox (https://github.com/gllmflndn/gifti.git): this is for generating functional connectivity
+
+For Shape-DNA analysis that appied in our study, please check http://reuter.mit.edu/software/shapedna/ and see the relevant papers:
+M. Reuter, F.-E. Wolter, N. Peinecke, Laplace–Beltrami spectra as ‘Shape-DNA’ of surfaces and solids. Computer-Aided Design 38, 342-366 (2006).
+M. Reuter, F. E. Wolter, M. Shenton, M. Niethammer, Laplace-Beltrami Eigenvalues and Topological Features of Eigenfunctions for Statistical Shape Analysis. Comput Aided Des 41, 739-755 (2009).
