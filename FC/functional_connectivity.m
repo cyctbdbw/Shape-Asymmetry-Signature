@@ -1,3 +1,5 @@
+%% This script is for generating the functional connectivity. 
+%% You should have the "processHCPcifti.m" in the right directory.
 parcellation='Schaefer' %You need to choose Schaefer or MMP
 TimePoint='T1' %You need to choose T1 or T2
 Schaefer_N=100; %You need to choose the N if the parcellation is 'Schaefer'
