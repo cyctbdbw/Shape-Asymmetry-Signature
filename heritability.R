@@ -1,3 +1,8 @@
+# The heritability analysis uses the OpenMx, 
+# please cite the references below, if you use this script for your own analysis
+# 1. S. Boker et al., OpenMx: An Open Source Extended Structural Equation Modeling Framework. Psychometrika 76, 306-317 (2011).
+# 2. M. C. Neale et al., OpenMx 2.0: Extended Structural Equation and Statistical Modeling. Psychometrika 81, 535-549 (2016).
+
 args = commandArgs(trailingOnly=TRUE)
 
 require(OpenMx)   
