@@ -1,4 +1,9 @@
-# This script extracts the eigenvalues/eigenfunctions of the ShapeDNA output.
+# This script extracts the eigenvalues/eigenfunctions of the Shape-DNA output.
+# See the references below for details of the Shape-DNA
+# 1. Reuter, M. et al. Laplace–Beltrami spectra as ‘Shape-DNA’ of surfaces and solids. 
+# Computer-Aided Design 38, 342-366 (2006).
+# 2. Reuter, M. et al. Laplace-Beltrami Eigenvalues and Topological Features of 
+# Eigenfunctions for Statistical Shape Analysis. Comput Aided Des 41, 739-755 (2009). 
 
 import warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
