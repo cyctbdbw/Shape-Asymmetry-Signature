@@ -17,7 +17,9 @@ For the heritability analysis, also see
 Arnatkeviciute. A. et al., Genetic influences on hub connectivity of the human connectome. Nat Commun 12, 4237 (2021).
 https://www.nature.com/articles/s41467-021-24306-2
 
-Dependances: gifti toolbox (https://github.com/gllmflndn/gifti.git): this toolbox is used when generating functional connectivity
+Dependances: 
+1. gifti toolbox (https://github.com/gllmflndn/gifti.git): this toolbox is used when generating functional connectivity
+2. PALM (Permutation Analysis of Linear Models; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM): this toolbox keep subjects' family structures intac when shuffling the subjects.
 
 For the Shape-DNA analysis that appied in our study, please check http://reuter.mit.edu/software/shapedna/ and see the relevant papers:
 1. M. Reuter, F.-E. Wolter, N. Peinecke, Laplace–Beltrami spectra as ‘Shape-DNA’ of surfaces and solids. Computer-Aided Design 38, 342-366 (2006). https://doi.org/10.1016/j.cad.2005.10.011
