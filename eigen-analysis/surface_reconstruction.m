@@ -1,4 +1,4 @@
-EF_num; %this is the total number of eigenfunctions/scales
+n=EF_num; %this is the total number of eigenfunctions/scales used for reconstruction
 coefsx_l=decomposeEigenFunction(eigenFunctionsL(:,1:n),leftSurface.vertices(:,1));
 coefsy_l=decomposeEigenFunction(eigenFunctionsL(:,1:n),leftSurface.vertices(:,2));
 coefsz_l=decomposeEigenFunction(eigenFunctionsL(:,1:n),leftSurface.vertices(:,3));
