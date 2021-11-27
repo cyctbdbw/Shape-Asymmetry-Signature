@@ -20,7 +20,7 @@ https://www.nature.com/articles/s41467-021-24306-2
 Dependances: 
 1. gifti toolbox (https://github.com/gllmflndn/gifti.git): this toolbox is used when generating functional connectivity
 2. PALM (Permutation Analysis of Linear Models; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM): this toolbox keep subjects' family structures intac when shuffling the subjects.
-3. Permutation Inference for Canonical Correlation Analysis(https://github.com/andersonwinkler/PermCCA)
+3. Permutation Inference for Canonical Correlation Analysis (https://github.com/andersonwinkler/PermCCA)
 4. spider chart toolbox (https://au.mathworks.com/matlabcentral/fileexchange/59561-spider_plot)
 
 For the Shape-DNA analysis that appied in our study, please check http://reuter.mit.edu/software/shapedna/ and see the relevant papers:
