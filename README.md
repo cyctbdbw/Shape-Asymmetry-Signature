@@ -11,7 +11,7 @@ This work is licensed under a
 
 # Shape-Asymmetry-Signature
 This repository provides scripts for the analysis in "The individuality of shape asymmetries of the human cerebral cortex". 
-See https://www.biorxiv.org/content/10.1101/2021.09.14.460242v1 for details.
+See https://www.biorxiv.org/content/10.1101/2021.09.14.460242v2 for details.
 
 For the heritability analysis, also see
 Arnatkeviciute. A. et al., Genetic influences on hub connectivity of the human connectome. Nat Commun 12, 4237 (2021).
