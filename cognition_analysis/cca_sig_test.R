@@ -3,6 +3,7 @@
 ## Purpose of script: Non-parametric significance testing between a composite variable (e.g. a variate from a cca or pls analysis)
 ## and a matrix of original metrics used to compute the composite variable (e.g. SAS_mean). It also support an optional flag to 
 ## to keep family structure intact if you use it for the HCP data.
+## Author: Yu-Chi Chen and ‪Sidhant Chopra‬ 
 ##
 ## Inputs: 
 ##
