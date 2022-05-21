@@ -4,10 +4,6 @@
 ## and a matrix of original metrics used to compute the composite variable (e.g. SAS_mean). It also support an optional flag to 
 ## to keep family structure intact if you use it for the HCP data.
 ##
-##
-## Author: Sid Chopra (sid.chopra@monash.edu)
-## Date Created: 24/07/2020
-## ---------------------------
 ## Inputs: 
 ##
 ## variate = a numeric matrix of dim n x 1.
