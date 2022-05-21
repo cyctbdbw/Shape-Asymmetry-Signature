@@ -10,6 +10,8 @@ This work is licensed under a
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 
 # Shape-Asymmetry-Signature
+![image](https://user-images.githubusercontent.com/48049448/169631022-87e6cedf-8588-4226-9f9f-eff81ee1476c.png)
+
 This repository provides scripts for the analysis in "The individuality of shape asymmetries of the human cerebral cortex". 
 See https://www.biorxiv.org/content/10.1101/2021.09.14.460242v2 for details.
 
