@@ -24,8 +24,6 @@ Dependances:
 2. PALM (Permutation Analysis of Linear Models; https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/PALM): this toolbox keep subjects' family structures intac when shuffling the subjects.
 3. Permutation Inference for Canonical Correlation Analysis (https://github.com/andersonwinkler/PermCCA)
 4. toolbox of correcting p-values for multiple comparison (https://au.mathworks.com/matlabcentral/fileexchange/61659-multicmp) 
-
-
-For the Shape-DNA analysis that appied in our study, please check http://reuter.mit.edu/software/shapedna/ and see the relevant papers:
-1. M. Reuter, F.-E. Wolter, N. Peinecke, Laplace–Beltrami spectra as ‘Shape-DNA’ of surfaces and solids. Computer-Aided Design 38, 342-366 (2006). https://doi.org/10.1016/j.cad.2005.10.011
-2. M. Reuter, F. E. Wolter, M. Shenton, M. Niethammer, Laplace-Beltrami Eigenvalues and Topological Features of Eigenfunctions for Statistical Shape Analysis. Comput Aided Des 41, 739-755 (2009). https://doi.org/10.1016/j.cad.2009.02.007
+5. Shape-DNA (https://github.com/Deep-MI/BrainPrint-legacy/blob/master/fs_shapeDNA.py) and see the relevant papers below:
+(1) M. Reuter, F.-E. Wolter, N. Peinecke, Laplace–Beltrami spectra as ‘Shape-DNA’ of surfaces and solids. Computer-Aided Design 38, 342-366 (2006). https://doi.org/10.1016/j.cad.2005.10.011
+(2) M. Reuter, F. E. Wolter, M. Shenton, M. Niethammer, Laplace-Beltrami Eigenvalues and Topological Features of Eigenfunctions for Statistical Shape Analysis. Comput Aided Des 41, 739-755 (2009). https://doi.org/10.1016/j.cad.2009.02.007
