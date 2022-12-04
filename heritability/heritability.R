@@ -3,6 +3,10 @@
 # 1. S. Boker et al., OpenMx: An Open Source Extended Structural Equation Modeling Framework. Psychometrika 76, 306-317 (2011).
 # 2. M. C. Neale et al., OpenMx 2.0: Extended Structural Equation and Statistical Modeling. Psychometrika 81, 535-549 (2016).
 
+# If this is the FIRST time you use OpenMX or use R to call matlab, please install the following packages first. 
+# install.packages('OpenMx')
+# install.packages('R.matlab')
+
 args = commandArgs(trailingOnly=TRUE)
 
 require(OpenMx)   
@@ -15,12 +19,15 @@ library(OpenMx)
 
 set.seed(200)
 
-# load the data
-setwd("....") # Change to the path with twin_SAS.mat   
-data_covar=readMat('twinCovariates.mat')
-data=readMat('twin_SAS.mat') # the file can be changed to individual hemisphere
+# load the data, you should change th path
+setwd("PATH OF YOUR FOLDER") # Change to the path with twin_SAS.mat   
+data_covar=readMat('twinCovariates.mat') # Chage the file to yours which contain confounding variables
+# We use age and sex as an example here.
+
+data=readMat('twin_SAS.mat') # The file contain the phenotype for heritability analysis
 
 # remove second additional sibling from the data
+# The first and second columns are twin pairs, and the third one is their non-twin sibling
 data$Output.MZ <- data$Output.MZ[,-4,];
 data$Output.DZ <- data$Output.DZ[,-4,];
 
@@ -44,7 +51,6 @@ data_covar$MZ.sex[is.na(data_covar$MZ.sex)] <- -999
 data_covar$DZ.ID[is.na(data_covar$DZ.ID)] <- -999
 data_covar$DZ.age[is.na(data_covar$DZ.age)] <- -999
 data_covar$DZ.sex[is.na(data_covar$DZ.sex)] <- -999
-
 
 # all edges
 numEdges = dim(data$Output.DZ)[3]
