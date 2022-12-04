@@ -9,7 +9,7 @@
 
 args = commandArgs(trailingOnly=TRUE)
 
-require(OpenMx)   
+require(OpenMx)   # not needed for the simulation, but will be needed when we come to model specification
 require(MASS) 
 require(R.matlab) 
 
@@ -20,14 +20,15 @@ library(OpenMx)
 set.seed(200)
 
 # load the data, you should change th path
-setwd("PATH OF YOUR FOLDER") # Change to the path with twin_SAS.mat   
-data_covar=readMat('twinCovariates.mat') # Chage the file to yours which contain confounding variables
-# We use age and sex as an example here.
+setwd("D:/HCP_s1200/twin/heri_test") # Change to the path with twin_SAS.mat   
+
+data_covar=readMat('twinCovariates.mat') 
+# Chage the file to yours which contain confounding variables
+# We use age and sex as an example of the coverance.
 
 data=readMat('twin_SAS.mat') # The file contain the phenotype for heritability analysis
 
 # remove second additional sibling from the data
-# The first and second columns are twin pairs, and the third one is their non-twin sibling
 data$Output.MZ <- data$Output.MZ[,-4,];
 data$Output.DZ <- data$Output.DZ[,-4,];
 
@@ -52,6 +53,7 @@ data_covar$DZ.ID[is.na(data_covar$DZ.ID)] <- -999
 data_covar$DZ.age[is.na(data_covar$DZ.age)] <- -999
 data_covar$DZ.sex[is.na(data_covar$DZ.sex)] <- -999
 
+
 # all edges
 numEdges = dim(data$Output.DZ)[3]
 heritabilityA <- numeric(numEdges)
@@ -61,8 +63,6 @@ heritabilityE <- numeric(numEdges)
 heritabilityS <- numeric(numEdges)
 heritabilitySp <- numeric(numEdges)
 best_model <- numeric(numEdges)
-pValue <- numeric(numEdges)
-pValueModelC <- numeric(numEdges)
 saturated <- numeric(numEdges)
 
 # (recommended by openMx administrators)
@@ -190,7 +190,7 @@ for (edge in c(1:numEdges)){
   estVE1     <- mxEval(e*e, twinACTEFit)              # unique environmental variance, e^2
   estVP1     <- (estVA1+estVC1+estVT1+estVE1)                  # total variance
   
-  heritmodels <- matrix(nrow = 8, ncol = 5)
+  heritmodels <- matrix(nrow = 6, ncol = 5)
   
   heritmodels[1,1] <- estVA1/estVP1                          # standardized additive genetic variance
   heritmodels[1,2] <- estVC1/estVP1
@@ -290,63 +290,28 @@ for (edge in c(1:numEdges)){
   heritmodels[6,4] <- estVE6/estVP6
   heritmodels[6,5] <- twinCTEFit@output$status$code
   
-  # Generate ATE Model - C=0
-  twinATE      <- twinACTE
-  twinATE      <- mxRename(twinATE, "twinATE")
-  twinATE      <- omxSetParameters(twinATE, labels="c", free=FALSE, values=0 )
-  twinATEFit   <- mxTryHard(twinATE)
-  
-  estVA7    <- mxEval(a*a, twinATEFit)             
-  estVC7    <- mxEval(c*c, twinATEFit)    
-  estVT7    <- mxEval(t*t, twinATEFit) 
-  estVE7    <- mxEval(e*e, twinATEFit)             
-  estVP7    <- (estVA7+estVC7+estVT7+estVE7)                
-  
-  heritmodels[7,1] <- estVA7/estVP7                          # standardized additive genetic variance
-  heritmodels[7,2] <- estVC7/estVP7
-  heritmodels[7,3] <- estVT7/estVP7
-  heritmodels[7,4] <- estVE7/estVP7
-  heritmodels[7,5] <- twinATEFit@output$status$code
-  
-  # Generate TE Model - A=0
-  twinTE      <- twinATE
-  twinTE      <- mxRename(twinTE, "twinTE")
-  twinTE      <- omxSetParameters(twinTE, labels="a", free=FALSE, values=0 )
-  twinTEFit   <- mxTryHard(twinTE)
-  
-  estVA8    <- mxEval(a*a, twinTEFit)             
-  estVC8    <- mxEval(c*c, twinTEFit)    
-  estVT8    <- mxEval(t*t, twinTEFit) 
-  estVE8    <- mxEval(e*e, twinTEFit)             
-  estVP8    <- (estVA8+estVC8+estVT8+estVE8)                
-  
-  heritmodels[8,1] <- estVA8/estVP8                          # standardized additive genetic variance
-  heritmodels[8,2] <- estVC8/estVP8
-  heritmodels[8,3] <- estVT8/estVP8
-  heritmodels[8,4] <- estVE8/estVP8
-  heritmodels[8,5] <- twinTEFit@output$status$code
-  
   # model comparison
-  options('digits' = 8)
+  options('digits' = 6)
   # compare saturated to other models
-  compValuesACE = mxCompare(SatModelFit, c(twinACTEFit, twinACEFit,twinAEFit,twinCEFit,twinEFit,twinCTEFit,twinATEFit,twinTEFit))
+  compValuesACE = mxCompare(SatModelFit, c(twinACTEFit, twinACEFit,twinAEFit,twinCEFit,twinEFit,twinCTEFit))
   #compValuesACE = mxCompare(twinACEFit, c(twinAEFit,twinCEFit,twinEFit))
   
   # find model with the lowest AIC
-  INDmin = which.min(compValuesACE$AIC[1:9])
+  INDmin = which.min(compValuesACE$AIC[1:7])
   AICmin = compValuesACE$AIC[INDmin]
   
   # check if this model is not significantly different from saturated
   pmin = compValuesACE$p[INDmin]
   
   if (INDmin==1) {
-    INDmin2 = which.min(compValuesACE$AIC[2:9])
+    INDmin2 = which.min(compValuesACE$AIC[2:7])
     heritabilityA[edge] <- heritmodels[INDmin2,1]
     heritabilityC[edge] <- heritmodels[INDmin2,2]
     heritabilityT[edge] <- heritmodels[INDmin2,3]
     heritabilityE[edge] <- heritmodels[INDmin2,4]
     heritabilityS[edge] <- 1; # 1 if saturated model gave lower AIC value
     heritabilitySp[edge] <- compValuesACE$p[INDmin2+1] # selecting from a table where first row is excluded
+    best_model[edge] <- INDmin
     saturated[edge] <- 1  
   } else {
     heritabilityA[edge] <- heritmodels[INDmin-1,1]
@@ -355,54 +320,29 @@ for (edge in c(1:numEdges)){
     heritabilityE[edge] <- heritmodels[INDmin-1,4]
     heritabilityS[edge] <- heritmodels[INDmin-1,5]
     heritabilitySp[edge] <- compValuesACE$p[INDmin] # selecting from a table where values in first row are NaNs
+    best_model[edge] <- INDmin
     saturated[edge] <- 0
   }
   
-  INDmin3 = which.min(compValuesACE$AIC[2:9])
-  best_model[edge] <- INDmin3
+  INDmin3 = which.min(compValuesACE$AIC[2:7])
   if (INDmin3==1) {
-    compforP_A = mxCompare(twinACTEFit, twinCTEFit)
-    pValue[edge] <- compforP_A$p[2]
-    compforP_C = mxCompare(twinACTEFit, twinATEFit)
-    pValueModelC[edge] <- compforP_C$p[2]
+    compforP = mxCompare(twinACTEFit, twinCTEFit)
+    pValue <- compforP$p[2]
   } else if (INDmin3==2) {
-    compforP_A = mxCompare(twinACEFit, twinCEFit)
-    pValue[edge] <- compforP_A$p[2]
-    compforP_C = mxCompare(twinACEFit, twinAEFit)
-    pValueModelC[edge] <- compforP_C$p[2]
+    compforP = mxCompare(twinACEFit, twinCEFit)
+    pValue <- compforP$p[2]
   } else if (INDmin3==3) {
-    compforP_A = mxCompare(twinAEFit, twinEFit)
-    pValue[edge] <- compforP_A$p[2]
-    compforP_C = mxCompare(twinACEFit, twinAEFit)
-    pValueModelC[edge] <- compforP_C$p[2]
+    compforP = mxCompare(twinAEFit, twinEFit)
+    pValue <- compforP$p[2]
   } else if (INDmin3==4) {
-    compforP_A = mxCompare(twinACEFit, twinCEFit)
-    pValue[edge] <- compforP_A$p[2]
-    compforP_C = mxCompare(twinCEFit, twinEFit)
-    pValueModelC[edge] <- compforP_C$p[2]
+    pValue <- 1
   } else if (INDmin3==5) {
-    compforP_A = mxCompare(twinAEFit, twinEFit)
-    pValue[edge] <- compforP_A$p[2]
-    compforP_C = mxCompare(twinCEFit, twinEFit)
-    pValueModelC[edge] <- compforP_C$p[2]
+    pValue <- 1
   } else if (INDmin3==6) {
-    compforP_A = mxCompare(twinACTEFit, twinCTEFit)
-    pValue[edge] <- compforP_A$p[2]
-    compforP_C = mxCompare(twinCTEFit, twinTEFit)
-    pValueModelC[edge] <- compforP_C$p[2]
-  } else if (INDmin3==7) {
-    compforP_A = mxCompare(twinATEFit, twinTEFit)
-    pValue[edge] <- compforP_A$p[2]
-    compforP_C = mxCompare(twinACTEFit, twinATEFit)
-    pValueModelC[edge] <- compforP_C$p[2]
-  } else if (INDmin3==8) {
-    compforP_A = mxCompare(twinATEFit, twinTEFit)
-    pValue[edge] <- compforP_A$p[2]
-    compforP_C = mxCompare(twinCTEFit, twinTEFit)
-    pValueModelC[edge] <- compforP_C$p[2]
+    pValue <- 1
   }
   
-   
+  
   #if (pmin>0.05) {
   # heritabilityA[edge] <- heritmodels[INDmin,1]
   # heritabilityC[edge] <- heritmodels[INDmin,2]
@@ -418,6 +358,6 @@ for (edge in c(1:numEdges)){
   #}
 }
 
-heritabilityACE <- data.frame(heritabilityA,heritabilityC,heritabilityT,heritabilityE,heritabilityS,heritabilitySp,best_model,pValue,pValueModelC,saturated)
-setwd("...")# Change to the output path
-write.csv(heritabilityACE,sprintf("heritability_SAS%s.txt",args[2]),row.names=FALSE)
+heritabilityACE <- data.frame(heritabilityA,heritabilityC,heritabilityT,heritabilityE,heritabilityS,heritabilitySp,best_model,pValue,saturated)
+setwd("D:/HCP_s1200/twin/heri_test") # Change to the path for output   
+write.csv(heritabilityACE,sprintf("heritability_results%s.txt",args[2]),row.names=FALSE)
